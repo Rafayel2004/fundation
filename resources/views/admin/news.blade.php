@@ -10,6 +10,16 @@
                     <th>Created At</th>
                 </tr>
             </thead>
+            <tbody>
+                @foreach($news as $new)
+                    <tr>
+                        <td></td>
+                        <td>{{$new->short_content}}</td>
+                        <td>{{$new->content}}</td>
+                        <td>{{$new->created_at}}</td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     </div>
 @endsection
