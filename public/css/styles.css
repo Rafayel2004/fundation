@@ -1,0 +1,585 @@
+* {
+    font-family: palatino linotype,serif;
+}
+
+.navbar {
+    position: relative;
+    background: initial;
+}
+
+.navBar-container::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 55px;
+    left: 0;
+    background: #eee8d8;
+    border-radius: 30px;
+}
+
+.head-container {
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    background-image: url(../images/logo.png);
+    margin-left: 76px;
+    width: 501px;
+    height: 187px;
+    max-width: 100%;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.language-box button {
+    width: 76px;
+    padding: 0;
+    height: 45px;
+    margin-top: 17px;
+    box-shadow: 0 6px 12px 0 rgb(0 0 0 / 10%);
+    border-radius: 24px 24px 24px 24px;
+}
+
+.language-box button::after {
+    top: 38px;
+    position: absolute;
+    right: 11px;
+}
+
+.dropdown.show .dropdown-toggle {
+    border-radius: 24px 24px 0 0;
+}
+
+.dropdown-menu.show a {
+    margin-bottom: 20px;
+}
+
+.dropdown.show .dropdown-toggle:focus {
+    box-shadow: unset !important;
+    background: #fff;
+}
+
+.language-box .dropdown-menu.show {
+    position: absolute;
+    transform: translate3d(0px, 62px, 0px);
+    top: -13px;
+    left: 0;
+    will-change: transform;
+    width: 78px;
+    min-width: unset !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 6px 12px 0 rgb(0 0 0 / 10%);
+    border-radius: 0 0 24px 24px;
+    border: unset;
+}
+
+.language-box .dropdown-menu.show::after {
+    position: absolute;
+    content: "";
+}
+
+.language-box img {
+    width: 20px;
+    position: relative;
+    left: -12px;
+}
+
+.person-image {
+    background-image: url(./../images/image_1.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 36vw;
+    margin: auto;
+    background-position: center bottom;
+}
+
+.personal-description {
+    position: relative;
+    /*min-width: 949px;*/
+    height: 533px;
+    margin: auto;
+    background-color: #d4d4d4;
+}
+
+.mash-container {
+    padding-top: 26px;
+    width: 100%;
+    display: flex;
+}
+
+.mash-container .box {
+
+    width: 295px;
+    background-color: #93797a;
+    color: #fff;
+    padding: 13px 13px 13px 47px;
+    line-height: 1.3em;
+    font-size: 16px;
+    position: absolute;
+    left: -10px;
+}
+
+.description-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.description-container .personal-left-section {
+    position: absolute;
+    left: 0;
+    top: 147px;
+    width: 379px;
+    margin-left: 35px;
+}
+
+.personal-left-section .title a {
+    color: #303030;
+    font-size: 16px;
+    font-style: italic;
+    text-decoration: underline;
+    font-weight: bold;
+    line-height: 1.3em;
+    letter-spacing: normal;
+    font-family: Palatino Linotype, serif;
+}
+
+.personal-left-section .description-title {
+    margin-top: 18px;
+    color: #303030;
+    font-family: palatino linotype,serif;
+    font-size: 18px;
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.personal-left-section .work-skills {
+    margin-top: 21px;
+}
+.personal-left-section .work-skills ul {
+    padding-inline-start: 15px;
+}
+
+.personal-left-section .work-skills li {
+    font-size: 13px;
+    line-height: 1.3em;
+    margin-top: 6px;
+}
+
+.personal-right-section {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 27px;
+}
+
+.personal-right-section .personal-avatar {
+    background-image: url("./../images/personal_avatar.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-width: 290px;
+    min-height: 416px;
+    margin-right: 20px;
+}
+
+.personal-right-section .about {
+    position: relative;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 45px;
+}
+
+.about .person-name {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: normal;
+    font-family: Palatino Linotype,serif;
+    margin-bottom: 18px;
+}
+
+.about .more-button {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.more-button a.btn {
+    width: 100%;
+    background: #93797a;
+    color: #fff;
+}
+
+.more-button a.btn:hover {
+    background: #7d9174 !important;
+    color: #fff !important;
+}
+
+.btn:focus, .btn.focus {
+    outline: 0;
+    box-shadow: unset;
+}
+
+.btn:hover {
+    color: #fff !important;
+}
+
+/*Footer*/
+.email-address,
+.copyright {
+    color: #000000;
+    text-decoration: underline;
+    font-style: italic;
+    font-size: 16px;
+    line-height: normal;
+    letter-spacing: normal;
+    font-weight: bold;
+}
+
+.email-address:hover,
+.address:hover,
+.copyright:hover {
+    color: #000000;
+}
+
+.social-links {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.social-links .facebook,
+.social-links .linkedin {
+    width: 45px;
+    height: 45px;
+    background-position: center;
+    background-size: cover;
+}
+
+.social-links .facebook {
+    background-image: url("./../images/Facebook400x230.png");
+    background-size: 207%;
+}
+.social-links .linkedin {
+    background-image: url("./../images/Linkedin-logo-1-550x550-300x300.png");
+}
+/*END FOOTER*/
+
+
+/*ABOUT US*/
+
+.about-description-box {
+    font-family: palatino linotype,serif;
+    line-height: 1.6;
+    font-size: 15px;
+    margin-top: 35px;
+    text-align: justify;
+}
+
+.about-description-box .title {
+    line-height: 1.1em;
+    text-align: center;
+    font-size: 28px;
+    font-family: palatino linotype,serif;
+    margin-bottom: 35px;
+}
+.about-description-box .about-description {
+    margin-bottom: 45px;
+}
+
+/*CONTACT*/
+
+.contact-box {
+    background-color: #d4d4d4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-box .title {
+    margin: 35px 0;
+}
+
+.contact-box .title,
+.contact-box .contact-address,
+.contact-email a {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: normal;
+    letter-spacing: normal;
+    font-family: 'Palatino Linotype',serif;
+}
+
+.contact-box .contact-email a {
+    color: #000000;
+}
+
+.phone-box {
+    display: flex;
+    font-size: 25px;
+}
+
+.phone-box .phone,
+.phone-box .phone-numbers div {
+    font-family: palatino linotype,serif;
+    font-weight: bold;
+}
+/*END NEWS*/
+
+/*NEWS*/
+.news-box {
+    background-color: #d4d4d4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.news-box .title {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: normal;
+    letter-spacing: normal;
+    font-family: 'Palatino Linotype',serif;
+    margin: 35px 0;
+}
+
+.news-container-box {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    line-height: normal;
+    letter-spacing: normal;
+    font-family: palatino linotype,serif;
+}
+
+.news-box .news-logo {
+    background-image: url("./../images/logo_2.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 210px;
+    height: 192px;
+}
+
+.news-description {
+    padding-left: 20px;
+}
+
+.news-description-text,
+.news-description-text-1,
+.news-description-text-3,
+.news-description-text-4 {
+    margin-bottom: 16px;
+}
+
+.news-description-text-3 {
+    display: flex;
+    justify-content: space-between;
+    width: 68%;
+    margin-bottom: 16px;
+}
+
+.news-description ul {
+    padding-inline-start: 15px;
+    list-style-type: decimal;
+}
+
+/*END NEWS*/
+
+/*DONATE*/
+
+.donate-box {
+    background-color: #d4d4d4;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 30px;
+}
+.donate-box > p{
+    align-self: center;
+    margin-bottom: 8px;
+    font-size: 21px;
+}
+
+
+.donate-box .title {
+    margin-top: 35px;
+    font-family: palatino linotype,serif;
+    line-height: 1.1em;
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 27px;
+}
+.donate-box .description {
+    font-size: 16px;
+    line-height: 1.3em;
+    letter-spacing: normal;
+}
+
+.donate-box .payment-list {
+    font-family: palatino linotype,serif;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.3em;
+}
+
+.payment-list ul {
+    padding-inline-start: 19px;
+}
+
+.payment-list li a {
+    color: #000000;
+    text-decoration: underline;
+    font-family: palatino linotype,serif;
+    font-weight: bold;
+}
+
+@media screen and (max-width: 1200px){
+
+    .personal-description {
+        height: unset;
+    }
+
+    .personal-description .description-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding-bottom: 22px;
+    }
+    .personal-left-section {
+        margin-top: 132px;
+        position: unset !important;
+        width: 100% !important;
+    }
+
+    .personal-right-section {
+        justify-content: center;
+    }
+}
+
+.donate-button-box {
+    display: flex;
+    justify-content: flex-end;
+    padding-left: 5px;
+}
+
+.donate-button-box button {
+    color: #fff;
+    background-color: #93797a;
+    border-color:  #93797a;
+}
+
+.donate-button-box button:hover {
+    background-color: #93797a;
+    border-color:  #93797a;
+}
+
+.donate-button-box button:active,
+.donate-button-box button:focus {
+    color: #fff;
+    background-color: #93797a !important;
+    border-color: #93797a !important;
+    box-shadow: unset !important;
+}
+
+.arca_secure_logo {
+    background-size: contain;
+    width: 104px;
+    height: 35px;
+    min-height: 35px;
+    background: url(../images/arca_logo.png) no-repeat center center;
+    margin-right: 12px;
+    flex: none;
+    background-size: 100px;
+}
+.visa_logo {
+    box-shadow: none;
+    height: 35px;
+    max-height: 35px;
+    max-width: 76px;
+    min-width: 76px;
+    min-height: 35px;
+    background: url(../images/visa_logo.png) no-repeat center center;
+    background-size: contain;
+    margin-right: 12px;
+}
+
+.master_logo {
+    box-shadow: none;
+    max-width: 85px;
+    min-width: 52px;
+    min-height: 35px;
+    height: 35px;
+    background: url(../images/mastercard_logo.png) no-repeat right 0 / contain;
+    margin-right: 12px;
+}
+
+.amex_logo {
+    box-shadow: none;
+    max-width: 109px;
+    min-width: 37px;
+    min-height: 35px;
+    height: 35px;
+    background: url(../images/amex_logo.png) no-repeat right 0 / contain;
+    margin-right: 12px;
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    padding: 10px 30px;
+}
+.flex_row {
+    display: flex;
+    justify-content: flex-end;
+    min-width: 320px;
+    align-items: center;
+    max-width: 100%;
+}
+.amex-note {
+    font-size: 8px;
+    flex: 1
+}
+.donate-box .input-group > input {
+    border:none;
+    min-height: 37px;
+    margin-right:5px;
+}
+.donate-box .input-group > select {
+    border: none
+}
+.thank-you {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 22px;
+}
+.thank-you img{
+    max-width: 150px;
+}
+
+.thank-you h1{
+    width: 100%;
+    text-align: center;
+    margin-top: 15px;
+}
+.page-not-found {
+    display: flex;
+    min-height: 50vh;
+}
+.page-not-found h1{
+    align-self: center;
+    text-align: center;
+    margin: auto;
+}
+.page-not-found h1 span{
+    display: block;
+}
+
