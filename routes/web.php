@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+//use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\NewsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +21,10 @@ Route::group(['prefix' => 'admin'], function () {
         'reset'    => false,
         'verify'   => false,
     ]);
-    Route::get('/home', "AdminController@admin")->name('admin.home');
-    Route::get('/about', "AdminController@about")->name('admin.about');
-    Route::get('/news', "AdminController@news")->name('admin.news');
+    Route::get('/home', "Admin\AdminController@admin")->name('admin.home');
+    Route::get('/about', "Admin\AdminController@about")->name('admin.about');
+    //Route::get('/news', "Admin\AdminController@news")->name('admin.news');
+    Route::resource('news', "Admin\NewsController");
 });
 Route::post('/create-donation', 'PaymentController@donate');
 
@@ -36,10 +38,6 @@ Route::group(['middleware'=>'language', 'prefix' => '{lang?}'],function ()
     Route::get('/thank-you', 'PageController@thankYou');
 });
 
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 

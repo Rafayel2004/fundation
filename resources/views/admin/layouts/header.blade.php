@@ -15,7 +15,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.news') }}" class="nav-link text-white {{ (request()->is("admin/news")) ? 'active' : '' }}">
+            <a href="{{ route('news.index') }}" class="nav-link text-white {{ (request()->is("admin/news")) ? 'active' : '' }}">
                News
             </a>
         </li>
