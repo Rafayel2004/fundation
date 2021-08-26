@@ -25,6 +25,9 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/about', "Admin\AdminController@about")->name('admin.about');
     //Route::get('/news', "Admin\AdminController@news")->name('admin.news');
     Route::resource('news', "Admin\NewsController");
+    Route::resource('about', "Admin\AboutUsController");
+
+
 });
 Route::post('/create-donation', 'PaymentController@donate');
 
@@ -42,3 +45,6 @@ Route::group(['middleware'=>'language', 'prefix' => '{lang?}'],function ()
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});

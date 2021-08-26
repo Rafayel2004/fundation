@@ -80,9 +80,9 @@ return [
     |
     */
 
-    'locale' => 'am',
+    'locale' => 'hy',
 
-    'locales' => ['en', 'ru', 'am'],
+    'locales' => ['en', 'ru', 'hy'],
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -94,7 +94,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'am',
+    'fallback_locale' => 'hy',
 
     /*
     |--------------------------------------------------------------------------

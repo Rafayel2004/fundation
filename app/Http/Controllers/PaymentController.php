@@ -31,7 +31,7 @@ class PaymentController extends Controller
             return response()->json('Should agree to terms ', 500);
         }
       $lang = session()->get('locale');
-        if ($lang == 'am') {
+        if ($lang == 'hy') {
             $lang = 'hy';
         }
         // TODO mobile not working

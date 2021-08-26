@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class PageController extends Controller
 {
@@ -21,7 +22,8 @@ class PageController extends Controller
      */
     public function about()
     {
-        return view('about');
+        $members = DB::table('about')->get();
+        return view('about',["members" => $members]);
     }
 
     /**
@@ -45,7 +47,8 @@ class PageController extends Controller
      */
     public function news()
     {
-        return view('news');
+        $news = DB::table("news")->paginate(3);
+        return view('news',["news" => $news]);
     }
 
     public function thankYou(Request $request)

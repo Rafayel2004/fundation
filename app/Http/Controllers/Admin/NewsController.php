@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Faker\Provider\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 class NewsController extends Controller
 {
     /**
@@ -25,8 +26,8 @@ class NewsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+        {
+        return view("admin/add-and-edit",["type" => "store"]);
     }
 
     /**
@@ -37,7 +38,35 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        print_r("something");
+        $rules = [
+            'image' => 'required',
+            'shortContentArm' => 'required',
+            'ContentArm' => 'required',
+            'shortContentRu' => 'required',
+            'ContentRu' => 'required',
+            'shortContentEng' => 'required',
+            'ContentEng' => 'required'
+        ];
+        $customMessages = [
+            'required' => 'The :attribute field is required.'
+        ];
+        $request->validate($rules, $customMessages);
+            $image = $request->file("image");
+        $fileName = time() .  "_" . $image->getClientOriginalName();
+        Db::table("news")->insert([
+            "image" => $fileName,
+            "short_content_en" => $request->input("shortContentEng"),
+            "content_en" => $request->input("ContentEng"),
+            "short_content_ru" => $request->input("shortContentRu"),
+            "content_ru" => $request->input("ContentRu"),
+            "short_content_hy" => $request->input("shortContentArm"),
+            "content_hy" => $request->input("ContentArm"),
+            "created_at" => Carbon::now()->format("Y-m-d")
+        ]);
+        $image->storeAs("/public/image/", $fileName);
+        $news = DB::table("news")->get();
+        return redirect()->to("admin/news")->with(["news" => $news]);
     }
 
     /**
@@ -48,7 +77,8 @@ class NewsController extends Controller
      */
     public function show($id)
     {
-//        print_r($id);
+        $currentNews = DB::table("news")->where("id", '=', $id)->first();
+        return view("admin/show",["news" => $currentNews]);
     }
 
     /**
@@ -59,8 +89,8 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        print_r(DB::table("news")->where("id", "=", $id)->get());
-        return view("admin/edit");
+        $currentNews = DB::table("news")->where("id", '=', $id)->first();
+        return view("admin/add-and-edit", ["currentNews" => $currentNews],["type" => "update"]);
     }
 
     /**
@@ -72,7 +102,40 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        print_r($id);
+//        print_r($id);
+        $rules = [
+            'shortContentArm' => 'required',
+            'ContentArm' => 'required',
+            'shortContentRu' => 'required',
+            'ContentRu' => 'required',
+            'shortContentEng' => 'required',
+            'ContentEng' => 'required'
+        ];
+        $customMessages = [
+            'required' => 'The :attribute field is required.'
+        ];
+        $request->validate($rules, $customMessages);
+
+        if($request->hasFile("image")){
+            $file = $request->file("image");
+            $image = time() .  "_" . $file->getClientOriginalName();
+            $file->storeAs("/public/image/", $image);
+        } else {
+            $image = DB::table("news")->select("image")->where("id", "=", $id)->first()->image;
+        }
+
+        DB::table("news")->where("id", '=', $id)->update([
+            'image' => $image,
+            "short_content_en" => $request->input("shortContentEng"),
+            "content_en" => $request->input("ContentEng"),
+            "short_content_ru" => $request->input("shortContentRu"),
+            "content_ru" => $request->input("ContentRu"),
+            "short_content_hy" => $request->input("shortContentArm"),
+            "content_hy" => $request->input("ContentArm"),
+            "updated_at" => now()
+        ]);
+        $news = DB::table("news")->get();
+        return redirect()->to("admin/news")->with(["news" => $news]);
     }
 
     /**
@@ -83,9 +146,9 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-        //print_r(11111);
+        print_r($id);
         DB::table("news")->where("id", "=", $id)->delete();
         $news = DB::table("news")->get();
-        return redirect("/admin/news")->with("news");
+        return redirect("admin/news")->with(["news" => $news]);
     }
 }

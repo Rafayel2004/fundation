@@ -12,9 +12,6 @@ class AdminController extends Controller
     public function admin() {
         return view('admin/index');
     }
-    public function about () {
-        return view('admin/about');
-    }
     public function news () {
         $news = DB::table("news")->get();
         return view('admin/news', ["news" => $news]);

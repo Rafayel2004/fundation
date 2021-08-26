@@ -605,4 +605,30 @@ td {
 .action-edit:hover {
     color: black;
 }
+    /*Show*/
+.show {
+    background-color: #e5e5e5;
+}
+.show-image img{
+    height: 500px;
+    max-width: 650px;
+}
+.info {
+    height: 500px;
+}
+ /* About Us*/
+
+.admin-about-table img{
+    width: 100px;
+}
+.form-language {
+    width: 500px;
+}
+.member {
+    margin-left: 80px;
+    width: 920px;
+}
+.member-card {
+    min-height: 365px;
+}
 
