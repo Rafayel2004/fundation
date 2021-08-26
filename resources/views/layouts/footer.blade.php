@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-4">
             <span style="text-decoration:underline">
-                <a class="copyright" href="{{'/files/am-kanonadrutyun.pdf'}}" target="_blank">
+                <a class="copyright" href="{{'/files/hy-kanonadrutyun.pdf'}}" target="_blank">
                     © {!! trans('contact.copyright') !!}
                 </a>
             </span>

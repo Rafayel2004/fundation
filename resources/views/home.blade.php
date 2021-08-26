@@ -16,7 +16,7 @@
                 <div class="description-container">
                     <div class="personal-left-section">
                        <div class="title">
-                           <a href="{{'/files/am-kanonadrutyun.pdf' }}" target="_blank">
+                           <a href="{{'/files/hy-kanonadrutyun.pdf' }}" target="_blank">
                                {!! trans('home.foundation_title') !!}
                            </a>
                        </div>

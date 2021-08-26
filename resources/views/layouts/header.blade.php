@@ -8,7 +8,7 @@
                    @switch($locale)
                         @case('en') <img src="{{asset('images/USA.svg')}}" alt="USA"> @break
                         @case('ru') <img src="{{asset('images/RUS.svg')}}" alt="RU"> @break
-                        @case('am') <img src="{{asset('images/ARM.svg')}}" alt="ARM"> @break
+                        @case('hy') <img src="{{asset('images/ARM.svg')}}" alt="ARM"> @break
                    @endswitch
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -16,13 +16,13 @@
                     @switch($locale)
                         @case($locale == 'en')
                             <a href="{!! url("ru/$path") !!}"><img src="{{asset('images/RUS.svg')}}" alt="RUS"></a>
-                            <a href="{!! url("am/$path") !!}"><img src="{{asset('images/ARM.svg')}}" alt="ARM"></a>
+                            <a href="{!! url("hy/$path") !!}"><img src="{{asset('images/ARM.svg')}}" alt="ARM"></a>
                         @break
                         @case($locale == 'ru')
                             <a href="{!! url("en/$path") !!}"><img src="{{asset('images/USA.svg')}}" alt="USA"></a>
-                            <a href="{!! url("am/$path") !!}"><img src="{{asset('images/ARM.svg')}}" alt="ARM"></a>
+                            <a href="{!! url("hy/$path") !!}"><img src="{{asset('images/ARM.svg')}}" alt="ARM"></a>
                         @break
-                        @case($locale == 'am')
+                        @case($locale == 'hy')
                             <a href="{!! url("en/$path") !!}"><img src="{{asset('images/USA.svg')}}" alt="USA"></a>
                             <a href="{!! url("ru/$path") !!}"><img src="{{asset('images/RUS.svg')}}" alt="RUS"></a>
                         @break

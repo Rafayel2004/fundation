@@ -10,7 +10,7 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('admin.about') }}" class="nav-link text-white {{ (request()->is("admin/about")) ? 'active' : '' }}">
+            <a href="{{ route('about.index') }}" class="nav-link text-white {{ (request()->is("admin/about")) ? 'active' : '' }}">
                 About Us
             </a>
         </li>
