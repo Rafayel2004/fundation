@@ -1,6 +1,8 @@
 @php
     use Carbon\Carbon;
     use Illuminate\Http\Request;
+    $locale = session()->get('locale');
+
 @endphp
 @extends('layouts.app')
 
@@ -19,13 +21,14 @@
                         <div class="d-flex flex-row"></div>
                         <div class="row news-card p-3">
                             <div class="col-md-4 ">
-                                <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive" src="http://foundation.loc/storage/image/{{$new->image}}"></div>
+                                <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive" src="http://127.0.0.1:8000/storage/photos/{{$new->image}}"></div>
                             </div>
                             <div class="col-md-8 d-flex flex-column">
                                 <div class="news-feed-text">
-                                    <span>{{ $new->{'short_content_' . Config::get('app.locale')} }}<br></span>
+                                    <span>{!! \Illuminate\Support\Str::words($new->{'content_' . Config::get('app.locale')}, 25) !!}<br></span>
                                 </div>
-                                <div class="d-flex flex-column mt-auto text-right">
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ url($locale."/more",$new->id) }}">{!! trans('news.button_href') !!}</a>
                                     <span class="date">{{ \Carbon\Carbon::parse($new->created_at )->format("Y-m-d")}}</span>
                                 </div>
                             </div>

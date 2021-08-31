@@ -23,7 +23,7 @@
                     <tbody>
                     @foreach($members as $member)
                         <tr class="admin-about-table">
-                            <td class="p-1"><img src="http://foundation.loc/storage/image/{{$member->image}}" alt=""></td>
+                            <td class="p-1"><img src="http://127.0.0.1:8000/storage/photos/{{$member->image}}" alt=""></td>
                             <td>{{$member->full_name_en}}</td>
                             <td>{{$member->profession_en}}</td>
                             <td>{{$member->full_name_ru}}</td>

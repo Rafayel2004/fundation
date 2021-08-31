@@ -10,11 +10,8 @@
             <thead>
                 <tr class="text-center bg-info text-white h5">
                     <th>Image</th>
-                    <th>Short Content En</th>
                     <th>Content En</th>
-                    <th>Short Content Ru</th>
                     <th>Content Ru</th>
-                    <th>Short Content Arm</th>
                     <th>Content Arm</th>
                     <th>Created At</th>
                     <th colspan="4">Action</th>
@@ -22,14 +19,11 @@
             </thead>
             <tbody>
                 @foreach($news as $new)
-                    <tr class="admin-news-table" data-id="{{$new->id}}">
-                        <td><img style="width: 100px" src="http://foundation.loc/storage/image/{{$new->image }}" alt=""></td>
-                        <td>{{\Illuminate\Support\Str::words($new->short_content_en,15)}}</td>
-                        <td>{{\Illuminate\Support\Str::words($new->content_en,35)}}</td>
-                        <td>{{\Illuminate\Support\Str::words($new->short_content_ru,15)}}</td>
-                        <td>{{\Illuminate\Support\Str::words($new->content_ru,35)}}</td>
-                        <td>{{\Illuminate\Support\Str::words($new->short_content_hy,15)}}</td>
-                        <td>{{\Illuminate\Support\Str::words($new->content_hy,35)}}</td>
+                    <tr class="admin-news-table text-center" data-id="{{$new->id}}">
+                        <td><img style="width: 100px" src="http://127.0.0.1:8000/storage/photos/{{$new->image }}" alt=""></td>
+                        <td>{!! \Illuminate\Support\Str::words($new->content_en,35) !!}</td>
+                        <td>{!! \Illuminate\Support\Str::words($new->content_ru,35) !!}</td>
+                        <td>{!! \Illuminate\Support\Str::words($new->content_hy,35) !!}</td>
                         <td nowrap="nowrap">{{\Illuminate\Support\Str::limit($new->created_at,10,$end = "")}}</td>
                         <td><a href="{{ route('news.edit', $new->id) }}"><button class="action-edit"><i class="fas fa-edit"></i></button></a></td>
                         <td><button class="action-delete" data-toggle="modal" data-target="#exampleModalLong-{{$new->id}}"><i class="fas fa-trash-alt"></i></button></td>

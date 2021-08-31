@@ -39,7 +39,9 @@ Route::group(['middleware'=>'language', 'prefix' => '{lang?}'],function ()
     Route::get('/news', 'PageController@news');
     Route::get('/donate', 'PageController@donate');
     Route::get('/thank-you', 'PageController@thankYou');
+    Route::get('/more/{id}', 'PageController@more')->name("news.more");
 });
+
 
 
 Auth::routes();

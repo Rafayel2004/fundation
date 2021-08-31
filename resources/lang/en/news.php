@@ -7,6 +7,7 @@ return [
     "date" => "\"08\" January 2021",
     "sub_title" => "Sargis Samvel Meliksetyan, the founder of \"VAHE MELIKSETYAN\" Educational-Medical Foundation.",
     "decide" => "DECIDED",
+    "button_href" => "Read More",
     "text_1" => "To establish \"VAHE MELIKSETYAN\" Educational-Medical Foundation (hereinafter referred to as the Foundation),",
     "text_2" => "To approve the charter of the Foundation,",
     "text_3" => "Appoint Sargis Samvel Meliksetyan as Acting Executive Director of the Foundation, authorize him to perform all the work related to the state registration of the Foundation.",

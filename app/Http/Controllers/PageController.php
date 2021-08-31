@@ -39,7 +39,7 @@ class PageController extends Controller
      */
     public function donate()
     {
-        return view('donate');
+        return view('donate-new');
     }
 
     /**
@@ -91,5 +91,9 @@ class PageController extends Controller
 
         Log::info('order  not found');
         abort('404');
+    }
+    public function more(Request $request) {
+        $news = DB::table("news")->where("id", "=", $request->route("id"))->first();
+        return view("more", ["news" => $news]);
     }
 }

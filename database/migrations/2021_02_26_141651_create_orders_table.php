@@ -17,6 +17,11 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('unique_bank_order_id')->nullable();
             $table->string('merchant_order_id')->nullable();
+            $table->string('firstname');
+            $table->string('lastname');
+            $table->string('email');
+            $table->boolean("secret")->default(0);
+            $table->boolean("donate_monthly")->default(0);
             $table->string('amount');
             $table->string('currency');
             $table->timestamps();

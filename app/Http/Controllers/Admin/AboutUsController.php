@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Faker\Core\File;
+use Illuminate\Support\Facades\Storage;
+
 class AboutUsController extends Controller
 {
     /**
@@ -51,7 +54,10 @@ class AboutUsController extends Controller
         ];
         $request->validate($rules, $customMessages);
         $image = $request->file("image");
-        $fileName = time() .  "_" . $image->getClientOriginalName();
+        $fileName = $image->getClientOriginalName();
+        if(!Storage::exists("public/photos/$fileName")){
+            $image->storeAs("/public/photos/", $fileName);
+        }
         Db::table("about")->insert([
             'image' => $fileName,
             'full_name_en' => $request->input("fullNameEn"),
@@ -61,7 +67,6 @@ class AboutUsController extends Controller
             'full_name_hy' => $request->input("fullNameHy"),
             'profession_hy' => $request->input("professionHy")
         ]);
-        $image->storeAs("/public/image/", $fileName);
         $members = DB::table("about")->get();
         return redirect()->to("admin/about")->with(["member" => $members]);
     }

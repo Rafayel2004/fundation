@@ -6,7 +6,7 @@
         </div>
         <div class="d-flex mt-5">
            <div class="show-image p-1 bg-white">
-               <img src="http://foundation.loc/storage/image/{{$news->image}}" alt="">
+               <img src="http://127.0.0.1:8000/storage/photos/{{$news->image}}" alt="">
            </div>
             <div class="info ms-5 ps-5 pe-5 bg-white border">
                 <ul class="nav nav-pills mb-3  mt-3" id="pills-tab" role="tablist">
@@ -22,25 +22,21 @@
                 </ul>
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active bg-white" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <h5 class="mb-3">Հակիրճ ինֆոմացիա</h5>
-                        <p class="bg-light p-2">{{$news->short_content_hy}}</p>
-                        <h5 class="mb-3">Ընդհանուր Ինֆոմացիա</h5>
-                        <p class="bg-light p-2">{{$news->content_hy}}</p>
+                        <div class="tab-pane fade show active bg-white" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <h5>Ընդհանուր Ինֆոմացիա</h5>
+                            <div class="bg-light p-2">{!! $news->content_hy !!}</div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                         <div class="tab-pane fade show active bg-white" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <h5 class="mb-3"> Краткая информация</h5>
-                            <p class="bg-light p-2">{{$news->short_content_ru}}</p>
                             <h5 class="mb-3">Общая информация</h5>
-                            <p class="bg-light p-2">{{$news->content_ru}}</p>
+                            <div class="bg-light p-2">{!! $news->content_ru !!}</div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                         <div class="tab-pane fade show active bg-white" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                            <h5 class="mb-3">Short Information</h5>
-                            <p class="bg-light p-2">{{$news->short_content_en}}</p>
                             <h5 class="mb-3">General Information</h5>
-                            <p class="bg-light p-2">{{$news->content_en}}</p>
+                            <div class="bg-light p-2">{!! $news->content_en !!}</div>
                         </div>
                     </div>
                 </div>

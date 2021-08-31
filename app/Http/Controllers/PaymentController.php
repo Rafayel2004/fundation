@@ -17,27 +17,35 @@ class PaymentController extends Controller
 
     public function donate(Request $request): \Illuminate\Http\JsonResponse
     {
-        $validated = Validator::make($request->all(), [
-            'isChecked' => 'required',
-            'amount' =>'required|numeric|min:1',
-            'currency' => 'required|in:051,643,978,840'
-        ]);
+//        $validated = Validator::make($request->all(), [
+//            'isChecked' => 'required',
+//            'amount' =>'required|numeric|min:1',
+//            'currency' => 'required|in:051,643,978,840'
+//        ]);
 
-        if ($validated->fails()) {
-            return response()->json($validated->errors(), 500);
-        }
-
+//        if ($validated->fails()) {
+//            return response()->json($validated->errors(), 500);
+//        }
         if (!$request->isChecked) {
             return response()->json('Should agree to terms ', 500);
         }
+
       $lang = session()->get('locale');
         if ($lang == 'hy') {
             $lang = 'hy';
         }
         // TODO mobile not working
         Log::info('API_URL' . config('app.API_URL'));
+//        dd($request->all());
         try {
-            $order = Order::create($request->except('isChecked'));
+            $order = Order::create([
+                "firstname" => $request->firstname,
+                "lastname" => $request->lastname,
+                "email" => $request->email,
+                "donate_monthly" => $request->monthly ? true : false,
+                "amount" => $request->amount,
+                "currency" => $request->currency,
+            ]);
             $url = config('app.url')."/" . session()->get('locale');
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -51,13 +59,12 @@ class PaymentController extends Controller
                 CURLOPT_CUSTOMREQUEST  => 'POST',
                 CURLOPT_POSTFIELDS     => array('userName'    => config('app.API_USERNAME'),
                                                 'password'    => config('app.API_PASSWORD'),
-                                                'orderNumber' => $order->id,
+                                                'orderNumber' => $order->id * rand(100,500),
                                                 'amount'      => $request->amount,
                                                 'returnUrl'   => $url."/thank-you",
                                                 'language'    => $lang,
                                                 'currency'    => $request->currency),
             ));
-
             $response = curl_exec($curl);
             Log::info('response =>>>>>>>>' . $response);
             $response = json_decode($response);
@@ -70,10 +77,9 @@ class PaymentController extends Controller
                 curl_close($curl);
                 Log::info('curl error  =>>>>>>>>' . json_encode($response));
             }
-
-   ;
             return response()->json("something went wrong", 500);
         } catch (\Exception $exception) {
+            dd($exception);
             Log::info('$exception =>>>>>>>>' . $exception->getMessage());
             return response()->json("something went wrong", 500);
         }
