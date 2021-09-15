@@ -22,22 +22,19 @@
                        </div>
                         <div class="description-title">{!! trans('home.foundation_sub_title') !!}</div>
                         <div class="work-skills">
-                            <ul>
-                                <li>{!! trans('home.foundation_work_skills_1') !!}</li>
-                                <li>{!! trans('home.foundation_work_skills_2') !!}</li>
-                                <li>{!! trans('home.foundation_work_skills_3') !!}</li>
-                                <li>{!! trans('home.foundation_work_skills_4') !!}</li>
-                            </ul>
+                           {!! $data->{'goal_content_' . Config::get('app.locale')} !!}
                         </div>
                     </div>
                     <div class="personal-right-section">
-                        <div class="personal-avatar"></div>
+                        <div class="personal-avatar">
+                            <img class="w-100 h-100" src="http://127.0.0.1:8000/storage/photos/{{$data->image}}" alt="">
+                        </div>
                         <div class="about">
                             <div class="person-name">
                                 {!! trans('home.person_name') !!}
                             </div>
                             <div class="description">
-                                <p>{!! trans('home.person_description') !!}</p>
+                               {!!  $data->{'about_' . Config::get('app.locale')} !!}
                             </div>
                             <div class="more-button">
                                 <a type="button" target="_blank" class="btn" href={{'/files/'. $locale.'-about.pdf' }}>

@@ -16,10 +16,9 @@
         <div class="container mt-5 mb-5">
             <h1 class="title text-center mb-3">{!! trans('news.title') !!}</h1>
             @foreach($news as $new)
-                <div class="row d-flex justify-content-center mt-2">
+                <div class="row d-flex justify-content-center mt-2" id="news">
                     <div class="col-md-8">
-                        <div class="d-flex flex-row"></div>
-                        <div class="row news-card p-3">
+                        <div class="row news-card p-3 ">
                             <div class="col-md-4 ">
                                 <div class="feed-image"><img class="news-feed-image rounded img-fluid img-responsive" src="http://127.0.0.1:8000/storage/photos/{{$new->image}}"></div>
                             </div>
@@ -41,4 +40,11 @@
         {{ $news->links() }}
         </div>
     </div>
+@endsection
+@section("jquery")
+    $(document).ready(function () {
+    $("news-card").lazyload({
+    effect : "fadeIn"
+    });
+    });
 @endsection

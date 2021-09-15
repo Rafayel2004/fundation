@@ -13,7 +13,7 @@ td {
     position: absolute;
     content: "";
     width: 100%;
-    height: 55px;
+    height: 65px;
     left: 0;
     background: #eee8d8;
     border-radius: 30px;
@@ -180,11 +180,8 @@ td {
 }
 
 .personal-right-section .personal-avatar {
-    background-image: url("./../images/personal_avatar.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-width: 290px;
-    min-height: 416px;
+    max-width: 290px;
+    max-height: 416px;
     margin-right: 20px;
 }
 
@@ -684,4 +681,15 @@ td {
 .submit button{
     width: 150px;
     height: 50px;
+}
+
+/* Reports */
+
+.time {
+    padding: 10px;
+    background-color: #93797a;
+}
+.report_title {
+    margin-left: 10px;
+   margin-top: 30px;
 }

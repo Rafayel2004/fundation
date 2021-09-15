@@ -10,11 +10,20 @@ use function GuzzleHttp\Promise\all;
 class AdminController extends Controller
 {
     public function admin() {
-        return view('admin/index');
+        $data = DB::table("home")->get();
+        return view('admin/index',["data" => $data]);
     }
     public function news () {
         $news = DB::table("news")->get();
         return view('admin/news', ["news" => $news]);
+    }
+    public function donate () {
+        $orders = DB::table("orders")->get();
+        return view('admin/donate/index', ["orders" => $orders]);
+    }
+    public function report () {
+       $reports = DB::table("reports")->get();
+        return view('admin/report/index', ["reports" => $reports]);
     }
 }
 

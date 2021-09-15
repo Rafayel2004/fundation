@@ -28,9 +28,9 @@ class NewsSeeder extends Seeder
             ),
          array(
              "image" => "news.png",
-             "content_en" => '<p><a href=\"http://lori.mtad.am/files/legislation/49430.pdf\" target=\"_blank\">By the order of the Lori Governor</a>&nbsp;Vanadzor Basic School No. 28 of the Lori Region of the RA was named after Vahe Meliksetyan, a graduate of the school, a gold medalist, a clinical pharmacist, a YSMU lecturer, a scientist, and a hero of the Second Artsakh War.</p>',
-             "content_ru" => '<p>Ванадзорская основная школа № 28 Лорийской области РА&nbsp;<a href=\"http://lori.mtad.am/files/legislation/49430.pdf\" target=\"_blank\">распоряжением губернатора Лори&nbsp;</a>переименована в честь Ваге Меликсетяна, выпускника школы, золотого медалиста, клинического фармацевта, преподавателя ЕГМУ, ученого, героя Второй Арцахской войны.</p>',
-             "content_hy" => '<p>ՀՀ Լոռու մարզի Վանաձորի թիվ 28 հիմնական դպրոցը տնօրինության նախաձեռնությամբ և&nbsp;<a href=\"http://lori.mtad.am/files/legislation/49430.pdf\">Լոռու մարզպետի հրամանով&nbsp;</a>անվանակոչվել է դպրոցի շրջանավարտ, ոսկե մեդալակիր, կլինիկական դեղագետ, ԵՊԲՀ դասախոս, գիտնական, Արցախյան 2-րդ պատերազմի հերոս Վահե Մելիքսեթյանի անունով։</p>',
+             "content_en" => '<p><a href="http://lori.mtad.am/files/legislation/49430.pdf" target=\"_blank\">By the order of the Lori Governor</a>&nbsp;Vanadzor Basic School No. 28 of the Lori Region of the RA was named after Vahe Meliksetyan, a graduate of the school, a gold medalist, a clinical pharmacist, a YSMU lecturer, a scientist, and a hero of the Second Artsakh War.</p>',
+             "content_ru" => '<p>Ванадзорская основная школа № 28 Лорийской области РА&nbsp;<a href="http://lori.mtad.am/files/legislation/49430.pdf" target=\"_blank\">распоряжением губернатора Лори&nbsp;</a>переименована в честь Ваге Меликсетяна, выпускника школы, золотого медалиста, клинического фармацевта, преподавателя ЕГМУ, ученого, героя Второй Арцахской войны.</p>',
+             "content_hy" => '<p>ՀՀ Լոռու մարզի Վանաձորի թիվ 28 հիմնական դպրոցը տնօրինության նախաձեռնությամբ և&nbsp;<a href="http://lori.mtad.am/files/legislation/49430.pdf">Լոռու մարզպետի հրամանով&nbsp;</a>անվանակոչվել է դպրոցի շրջանավարտ, ոսկե մեդալակիր, կլինիկական դեղագետ, ԵՊԲՀ դասախոս, գիտնական, Արցախյան 2-րդ պատերազմի հերոս Վահե Մելիքսեթյանի անունով։</p>',
              "created_at" => '2021-08-26 20:00:00',
              "updated_at" => '2021-08-27 07:39:01'
             ),

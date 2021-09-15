@@ -37,6 +37,9 @@
                     </li>
                 </ul>
             </div>
+            <div class="alert alert-danger d-none">
+
+            </div>
             <div class="main bg-white">
                 <form  method="POST" class="needs-validation" novalidate>
                     @csrf
@@ -182,7 +185,7 @@
                                 <p class="h5">
                                     {!! trans('donate.donation_amount_other_ways') !!}
                                 </p>
-                                <input data-currency="051" class="form-control amount" id="amount" name="amount" type="number" placeholder="{!! trans('donate.sum') !!}" >
+                                <input data-currency="051" min="1" value="0" class="form-control amount" id="amount" name="amount" type="number" placeholder="{!! trans('donate.sum') !!}" >
                             </div>
                         </div>
                     </div>
@@ -190,32 +193,23 @@
                         <div class="user d-flex justify-content-around">
                             <div class="form-group">
                                 <input type="text" class="form-control" id="inputFirstName" name="firstname"  placeholder="{!! trans('donate.donator_fistname') !!}" required>
-                                <div class="invalid-feedback ">
-                                    {!! trans('donate.donator_fistname')  . ' ' . trans('donate.required')!!}
-                                </div>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="inputLastName" name="lastname" placeholder="{!! trans('donate.donator_lastname') !!}" required>
-                                <div class="invalid-feedback ">
-                                    {!! trans('donate.donator_lastname')  . ' ' . trans('donate.required')!!}
-                                </div>
                             </div>
                             <div class="form-group">
                                 <input  type="email" class="form-control" id="inputEmail" name="email" placeholder="{!! trans('donate.donator_email') !!}" required>
-                                <div class="invalid-feedback ">
-                                    {!! trans('donate.donator_email')  . ' ' . trans('donate.required')!!}
-                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="d-flex justify-content-around bg-page">
                         <div class="security d-flex">
                             <div class="mr-3 mt-2">
-                                <input type="radio" class="align-top" id="public" checked>
+                                <input type="radio" name="security" class="align-top" value="true" id="public" checked>
                                 <label class="h5 mb-0 align-middle" for="public">{!! trans('donate.security_public') !!}</label>
                             </div>
                             <div class="d-inline mt-2">
-                                <input type="radio" id="public" class="align-middle">
+                                <input type="radio" id="public" name="security" value="false" class="align-middle">
                                 <label class="h5 mb-0 align-middle"  for="public">{!! trans('donate.security_secret') !!}</label>
                             </div>
                         </div>
@@ -244,6 +238,31 @@
                 </div>
                 <div class="amex-note">{!! trans('donate.amex_notification') !!}</div>
             </footer>
+            @if(count($orders) != 0)
+            <div class="mt-3">
+                <h4 class="text-center pb-2">Կատարված նվիրատվություններ</h4>
+                <table class="table text-center">
+                    <thead class="text-center">
+                    <tr>
+                        <th>{!! trans('report.firstname') !!}</th>
+                        <th>{!! trans('report.lastname') !!}</th>
+                        <th>{!! trans('report.sum') !!}</th>
+                        <th>{!! trans('report.date') !!}</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    @foreach($orders as $order)
+                        <tr>
+                            <td>{{$order->firstname}}</td>
+                            <td>{{$order->lastname}}</td>
+                            <td>{{ $order->amount }} {{ ($order->currency == "051") ? "ԴՐ" : (($order->currency == "643") ? "p" : (($order->currency == "840") ? "$" : "Eur"))}} </td>
+                            <td>{{ $order->updated_at }}</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            @endif
         </div>
     </div>
 
@@ -253,6 +272,9 @@
         let isChecked = false;
         let code;
         let value;
+        let errorUi = document.getElementById("error")
+        const radios = document.querySelectorAll(".tab-content input[type='radio']");
+        const errorDiv = document.querySelector(".alert.alert-danger.d-none")
         const tabs = document.querySelectorAll(".tab-li");
         const amount = document.querySelector('#amount');
         const firstname = document.querySelector('#inputFirstName');
@@ -263,69 +285,25 @@
         const checkbox = document.querySelector('#exampleCheck1');
         const forms = document.getElementsByClassName('needs-validation');
         const monthly = document.getElementById("monthly");
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                // Loop over them and prevent submission
-                let validation = Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        } else {
-                            // event.preventDefault();
-                            // console.log("haba1")
-                            let radio = document.querySelector(".tab-content input:checked");
-                            const currency = document.createElement("input")
-                            currency.type = 'hidden';
-                            currency.name = "currency";
-                            if(radio){
-                                currency.value = radio.dataset.currency
-                                amount.value = radio.value
-                            } else {
-                                currency.value = document.querySelector("input[type='number']").dataset.currency
-                            }
-                            forms[0].append(currency)
-                            forms[0].querySelector("input[type='checkbox'][name='isChecked']").value = true
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-        document.getElementById("submit").addEventListener("click", function (){
-            let checkedRadio  = document.querySelectorAll(".tab-content input:checked");
-            if(checkedRadio.length == 0){
-                document.querySelector("input[type='number']").setAttribute("required", "")
-            }
-
-        })
-
-        amount.addEventListener("click", function (){
-            if(document.querySelector(".tab-content input:checked")){
-                document.querySelector(".tab-content input:checked").checked = false;
-            }
-        })
-        tabs.forEach( (tabs) => {
-            tabs.addEventListener("click", (e) => {
-                amount.dataset.currency = e.target.dataset.currency
+        const security = document.getElementsByName("security");
+        let securityChecked ;
+        // document.getElementById("submit").addEventListener("click", function (){
+        //     let checkedRadio  = document.querySelectorAll(".tab-content input:checked");
+        //     if(checkedRadio.length == 0){
+        //         document.querySelector("input[type='number']").setAttribute("required", "")
+        //     }
+        //
+        // })
+        radios.forEach( (radio) => {
+           radio.addEventListener("change", function () {
+                amount.value = null;
+           })
+        });
+        amount.addEventListener("input", function () {
+            console.log("sdfsd")
+            radios.forEach( (radio) => {
+                radio.checked = "";
             })
-        })
-        firstname.addEventListener("change", (e) => {
-            if(e.target.value.trim() == ""){
-               e.target.value = "";
-            }
-        })
-        lastname.addEventListener("change", (e) => {
-            if(e.target.value.trim() == ""){
-                e.target.value = "";
-            }
-        })
-        email.addEventListener("change", (e) => {
-            if(e.target.value.trim() == ""){
-                e.target.value = "";
-            }
         })
         checkbox.addEventListener('change', (e) => {
             if (e.target.checked === true) {
@@ -338,31 +316,70 @@
         })
 
         async function createDonation() {
+            if( errorDiv.childNodes[1]){
+                errorDiv.childNodes[1].remove();
+                errorDiv.classList.add("d-none");
+            }
             event.preventDefault()
-            // if (!isChecked || firstname.value || lastname.value || amount <= 0 || amount.dataset.currency) {
-            //     return false;
-            // }
+            let radio = document.querySelector(".tab-content input:checked");
+            const currency = document.createElement("input")
+            currency.type = 'hidden';
+            currency.name = "currency";
+            if(radio){
+                currency.value = radio.dataset.currency
+                // amount.value = radio.value
+            } else {
+                currency.value = document.querySelector("input[type='number']").dataset.currency
+            }
+            forms[0].append(currency)
+            forms[0].querySelector("input[type='checkbox'][name='isChecked']").value = true
 
             if(monthly.checked){
                monthly.value = true;
             }
-            if(document.querySelector(".tab-content input:checked")){
-                amount.value = document.querySelector(".tab-content input:checked").value
+
+            security.forEach( (e) => {
+                if(e.checked){
+                    securityChecked = e;
+                    console.log(securityChecked);
+                }
+            })
+            if (!amount) {
+                amount.value = 0;
             }
-            const response = await axios.post('/create-donation', {
+            let regex =  new RegExp(/^(?:[1-9]\d*|0)$/);
+            if (!regex.test(amount.value)) {
+                amount.value = null;
+            }
+            const post = await axios.post('/create-donation', {
                 isChecked: isChecked,
                 firstname: firstname.value,
                 lastname: lastname.value,
                 email: email.value,
                 donate_monthly: monthly.value,
-                amount: amount.value,
-                currency: amount.dataset.currency
-            });
-            console.log(response)
-            if (response && response.status === 200) {
-                console.log(response.data)
-                window.location.href = response.data.formUrl;
+                amount: (document.querySelector(".tab-content input:checked") != null) ? +document.querySelector(".tab-content input:checked").value : +amount.value,
+                currency: amount.dataset.currency,
+                security : securityChecked.value
+            }).then( response => response).catch( err => err );
+            if (post && post.status === 200) {
+                checkbox.checked = "";
+                if( errorDiv.childNodes[1]){
+                    errorDiv.childNodes[1].remove();
+                    errorDiv.classList.add("d-none");
+                }
+                window.location.href = post.data.formUrl;
+            } else {
+                let response = post.response.data.errors
+                errorDiv.classList.remove("d-none")
+                let ui  = document.createElement("ui");
+                for (key in response) {
+                    let li = document.createElement("li");
+                    li.innerText = response[key][0];
+                    ui.append(li)
+                 }
+                errorDiv.append(ui)
             }
         }
+
     </script>
 @endsection

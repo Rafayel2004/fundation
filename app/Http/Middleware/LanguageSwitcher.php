@@ -23,15 +23,14 @@ class LanguageSwitcher
     {
         if ($request->method() === 'GET') {
             $segment = $request->segment(1);
-
             if (!in_array($segment, config('app.locales'))) {
                 $segments = $request->segments();
+//                dd($segments);
                 $fallback = session('locale') ?: config('app.fallback_locale');
                 $segments = Arr::prepend($segments, $fallback);
 
                 return redirect()->to(implode('/', $segments));
             }
-
             session(['locale' => $segment]);
             app()->setLocale($segment);
         }

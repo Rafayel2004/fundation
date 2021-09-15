@@ -20,7 +20,7 @@
                 @foreach($members as $member)
                     <div class="col-3 mb-3 ms-2">
                         <div class="card member-card" style="width: 14rem;">
-                            <img class="card-img-top" src="http://foundation.loc/storage/image/{{$member->image}}" alt="Card image cap">
+                            <img class="card-img-top" src="http://127.0.0.1:8000/storage/photos/{{$member->image}}" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold">{{$member->{'full_name_' . Config::get('app.locale')} }}</h5>
                                 <p class="card-text">{{$member->{'profession_' . Config::get('app.locale')} }}</p>

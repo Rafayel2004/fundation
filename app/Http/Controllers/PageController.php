@@ -14,7 +14,8 @@ class PageController extends Controller
      */
     public function home()
     {
-        return view('home');
+        $data = DB::table("home")->first();
+        return view('home',["data" => $data]);
     }
 
     /**
@@ -29,9 +30,10 @@ class PageController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function contact()
+    public function report()
     {
-        return view('contact');
+        $reports = DB::table("reports")->get();
+        return view('report', ["reports" => $reports]);
     }
 
     /**
@@ -39,7 +41,8 @@ class PageController extends Controller
      */
     public function donate()
     {
-        return view('donate-new');
+        $orders = DB::table("orders")->where("secret", "=", true)->where("merchant_order_id", "!=", null)->get();
+        return view('donate-new',["orders" => $orders]);
     }
 
     /**
@@ -53,6 +56,7 @@ class PageController extends Controller
 
     public function thankYou(Request $request)
     {
+//        dd($request);
         try {
             $curl = curl_init();
             curl_setopt_array($curl, array(
@@ -66,7 +70,7 @@ class PageController extends Controller
                 CURLOPT_CUSTOMREQUEST => 'POST',
                 CURLOPT_POSTFIELDS => array(
                     'userName' => config('app.API_USERNAME'),
-                        'password' => config('app.API_PASSWORD'),
+                    'password' => config('app.API_PASSWORD'),
                     'orderId' => $request->orderId),
             ));
 
@@ -74,6 +78,7 @@ class PageController extends Controller
             Log::info('order status response coming from api, thank you page =>>>>>>>>' . $response);
             Log::info('thankYou request all  =>>>>>>>>' . json_encode($request->all()));
             $response = json_decode($response);
+//            \Stripe::setApiKey(env('STRIPE_SECRET'));
             if ($response && $response->orderStatus == 2) {
                 // if success then  updating merchant_id field(just not to add additional column in db, this one already exist :))
                 $order = Order::where('unique_bank_order_id', $request->orderId)->where('merchant_order_id', null)->first();
@@ -82,15 +87,18 @@ class PageController extends Controller
                     $order->update(['merchant_order_id' => 'paid']);
                     Log::info('order updated after success');
                     return view('thank-you');
+                } else {
+                  return view("errors.404");
                 }
             }
+//            dd($response);
         } catch (\Exception $e) {
             Log::info('thank you page exception  =>>>>>>>>' . json_encode($e->getMessage()));
         }
 
 
-        Log::info('order  not found');
-        abort('404');
+        Log::info('order not found');
+        return view('errors.404');
     }
     public function more(Request $request) {
         $news = DB::table("news")->where("id", "=", $request->route("id"))->first();

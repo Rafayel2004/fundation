@@ -2,7 +2,7 @@
 return [
     "home" => "HOME",
     "about_us" => "ABOUT US",
-    "contact" => "CONTACT",
+    "report" => "REPORT",
     "news" => "NEWS",
     "donate" => "DONATE",
 ];

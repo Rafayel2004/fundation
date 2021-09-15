@@ -19,7 +19,7 @@ class NewsController extends Controller
     public function index()
     {
         $news = DB::table("news")->get();
-        return view('admin/news', ["news" => $news]);
+        return view('admin/news/news', ["news" => $news]);
     }
 
     /**
@@ -29,7 +29,7 @@ class NewsController extends Controller
      */
     public function create()
         {
-        return view("admin/add-and-edit",["type" => "store"]);
+        return view("admin/news/add-and-edit",["type" => "store"]);
     }
 
     /**
@@ -64,7 +64,7 @@ class NewsController extends Controller
             "created_at" => Carbon::now()->format("Y-m-d")
         ]);
         $news = DB::table("news")->get();
-        return redirect()->to("admin/news")->with(["news" => $news]);
+        return redirect()->to("admin/news/news")->with(["news" => $news]);
     }
 
     /**
@@ -76,7 +76,7 @@ class NewsController extends Controller
     public function show($id)
     {
         $currentNews = DB::table("news")->where("id", '=', $id)->first();
-        return view("admin/show",["news" => $currentNews]);
+        return view("admin/news/show",["news" => $currentNews]);
     }
 
     /**
@@ -88,7 +88,7 @@ class NewsController extends Controller
     public function edit($id)
     {
         $currentNews = DB::table("news")->where("id", '=', $id)->first();
-        return view("admin/add-and-edit", ["currentNews" => $currentNews],["type" => "update"]);
+        return view("admin/news/add-and-edit", ["currentNews" => $currentNews],["type" => "update"]);
     }
 
     /**
@@ -100,7 +100,6 @@ class NewsController extends Controller
      */
     public function update(Request $request, $id)
     {
-//        print_r($id);
         $rules = [
             'ContentArm' => 'required',
             'ContentRu' => 'required',
@@ -115,12 +114,11 @@ class NewsController extends Controller
             $file = $request->file("image");
             $image = $file->getClientOriginalName();
             if(!Storage::exists("public/photos/$image")){
-                $image->storeAs("/public/photos/", $image);
+                $file->storeAs("/public/photos/", $image);
             }
         } else {
             $image = DB::table("news")->select("image")->where("id", "=", $id)->first()->image;
         }
-
         DB::table("news")->where("id", '=', $id)->update([
             'image' => $image,
             "content_en" => $request->input("ContentEng"),
@@ -129,7 +127,7 @@ class NewsController extends Controller
             "updated_at" => now()
         ]);
         $news = DB::table("news")->get();
-        return redirect()->to("admin/news")->with(["news" => $news]);
+        return redirect()->to("admin/news");
     }
 
     /**
@@ -143,6 +141,6 @@ class NewsController extends Controller
         print_r($id);
         DB::table("news")->where("id", "=", $id)->delete();
         $news = DB::table("news")->get();
-        return redirect("admin/news")->with(["news" => $news]);
+        return redirect("admin/news/news")->with(["news" => $news]);
     }
 }

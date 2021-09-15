@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use http\Env\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
@@ -15,28 +16,29 @@ class PaymentController extends Controller
         Log::info('request>> '.json_encode($request));
     }
 
-    public function donate(Request $request): \Illuminate\Http\JsonResponse
+    public function donate(Request $request)
     {
-//        $validated = Validator::make($request->all(), [
-//            'isChecked' => 'required',
-//            'amount' =>'required|numeric|min:1',
-//            'currency' => 'required|in:051,643,978,840'
-//        ]);
-
-//        if ($validated->fails()) {
-//            return response()->json($validated->errors(), 500);
-//        }
-        if (!$request->isChecked) {
-            return response()->json('Should agree to terms ', 500);
-        }
-
+//        return response()->json($request);
+        $rules = [
+            "amount" => "required|numeric|min:2",
+            'currency' => 'required|in:051,643,978,840',
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required|email'
+        ];
+        $customMessages = [
+            'required' => 'The :attribute field is required.',
+            'email' => "Please insert a valid email address",
+            'min' => "The :attribute min is 1"
+        ];
+        $request->validate($rules, $customMessages);
+//
       $lang = session()->get('locale');
         if ($lang == 'hy') {
             $lang = 'hy';
         }
         // TODO mobile not working
         Log::info('API_URL' . config('app.API_URL'));
-//        dd($request->all());
         try {
             $order = Order::create([
                 "firstname" => $request->firstname,
@@ -45,6 +47,7 @@ class PaymentController extends Controller
                 "donate_monthly" => $request->monthly ? true : false,
                 "amount" => $request->amount,
                 "currency" => $request->currency,
+                "secret" => $request->security ? true : false,
             ]);
             $url = config('app.url')."/" . session()->get('locale');
             $curl = curl_init();
@@ -60,7 +63,7 @@ class PaymentController extends Controller
                 CURLOPT_POSTFIELDS     => array('userName'    => config('app.API_USERNAME'),
                                                 'password'    => config('app.API_PASSWORD'),
                                                 'orderNumber' => $order->id * rand(100,500),
-                                                'amount'      => $request->amount,
+                                                'amount'      => $request->amount*100,
                                                 'returnUrl'   => $url."/thank-you",
                                                 'language'    => $lang,
                                                 'currency'    => $request->currency),

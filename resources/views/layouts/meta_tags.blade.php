@@ -7,6 +7,7 @@
 <meta property="og:url" content="https://www.meliksetyan.org">
 <meta property="og:site_name" content="VaheMeliksetyan Fund">
 <meta property="og:type" content="website">
+<meta property="og:image" content="http://127.0.0.1:8000/storage/photos/personal_avatar.png" />
 <link rel="canonical" href="VaheMeliksetyan Fund">
 
 
